@@ -22,13 +22,17 @@ int main() {
     bn::fixed jump_strength = 1.3;
 
     while(true) {
+        // Horizontal Movement & sprite Flipping
         if(bn::keypad::left_held()) {
             dot.set_x(dot.x() - speed);
+            dot.set_horizontal_flip(true);//Face left
         }
-        if(bn::keypad::right_held()) {
+        else if(bn::keypad::right_held()) {
             dot.set_x(dot.x() + speed);
+            dot.set_horizontal_flip(false);//Face right
         }
-        if(bn::keypad::a_pressed()) {
+        //Jump only if touching floor
+        if(bn::keypad::a_pressed()&& dot.y()>=FLOOR) {
             dy -= jump_strength;
         }
 
